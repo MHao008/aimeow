@@ -1,0 +1,10 @@
+spring:
+  ai:
+    openai:
+      api-key: sk-xxxxx
+      base-url: https://apikfm.com # 使用开发喵API
+  datasource:
+    url: jdbc:mysql://localhost:3306/text2sql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123123
