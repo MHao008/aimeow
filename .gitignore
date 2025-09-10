@@ -5,3 +5,6 @@ Python + LangChain 0.3 实战智能体/test.py
 .DS_Store
 Python + LangChain 0.3 实战智能体/__pycache__/*
 Python + LangChain 0.3 实战智能体/kb_db/*
+
+*/**/*.pt
+Speech-to-Text/models/base.pt
