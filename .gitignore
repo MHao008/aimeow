@@ -8,3 +8,4 @@ Python + LangChain 0.3 实战智能体/kb_db/*
 
 */**/*.pt
 Speech-to-Text/models/base.pt
+AIAgent入门到智能/test_output/*
