@@ -42,7 +42,7 @@ os.environ["OPENAI_API_BASE"] = "https://apikfm.com/v1" # 这里使用我们自�
 # 步骤2：初始化“大脑” (LLM)(与上一期相同) 
 # -----------------------------------------------------
 print("[1/5] 正在初始化大模型 '大脑'...")
-# 我们选用智谱GLM-4，你也可以换成Moonshot或OpenAI
+# 我们选用gpt-4o，你也可以换成Moonshot或OpenAI
 llm = ChatOpenAI(
     model="gpt-4o",
     temperature=0.1, # Agent执行任务，温度调低，确保稳定性
