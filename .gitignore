@@ -10,3 +10,6 @@ Python + LangChain 0.3 实战智能体/kb_db/*
 Speech-to-Text/models/base.pt
 AIAgent入门到智能/test_output/*
 AIAgent入门到智能/__pycache__/*.pyc
+
+**/ckpts/*
+**/ckpts/**/*
