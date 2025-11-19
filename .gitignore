@@ -13,3 +13,11 @@ AIAgent入门到智能/__pycache__/*.pyc
 
 **/ckpts/*
 **/ckpts/**/*
+
+## test
+kokoro-tts/output_full.wav
+kokoro-tts/test.py
+PiperTTS/demo.py
+PiperTTS/output.wav
+PiperTTS/models/zh_CN-huayan-medium.onnx
+PiperTTS/models/zh_CN-huayan-medium.onnx.json

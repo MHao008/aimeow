@@ -24,6 +24,9 @@ from agent_tools import (
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_community.chat_message_histories.in_memory import ChatMessageHistory
 
+# 导入本期的RAG工具
+from knowledge_tools import query_dify_knowledge_base # <-- 新增导入
+
 # ！！！！！！！！！！！！！！！！！！！！
 # 步骤1：导入“长期记忆”相关的新模块
 # ！！！！！！！！！！！！！！！！！！！！
@@ -138,7 +141,52 @@ tools = [
     # <-- 新增长期记忆工具 -->
     # ！！！！！！！！！！！！！！！！！！！！
     save_user_info,
-    get_user_info
+    get_user_info,
+    Tool(
+        name="QueryWeather",
+        func=get_realtime_weather,
+        description="""查询指定城市的实时天气信息。
+                   参数: city_name (str): 必须是标准的中文城市名称，例如 '北京', '上海', '深圳市'。
+                   返回: str: 包含天气、温度、风向的格式化字符串。"""
+    ),
+    Tool(
+        name="QueryStockPrice",
+        func=get_stock_realtime_price,
+        description="""查询指定股票代码的最新实时行情价格。
+                   参数: stock_code (str): 必须是Tushare标准的股票代码, 格式为 'XXXXXX.SZ' 或 'XXXXXX.SH'。
+                   例如: '000001.SZ' (平安银行), '600519.SH' (贵州茅台)。"""
+    ),
+    Tool(
+        name="ReadFile",
+        func=read_file,
+        description="""读取指定路径的文本文件内容。
+                   参数: file_path (str): 要读取的文件的完整路径。"""
+    ),
+    Tool(
+        name="WriteFile",
+        func=write_file_wrapper,
+        description="""将指定的文本内容写入到指定路径的文件中。
+                   如果文件已存在，它将被覆盖。
+                   参数: 必须是一个JSON格式的字符串。
+                   JSON格式: {{"file_path": "要写入的文件的完整路径", "content": "要写入文件的文本内容"}}"""
+    ),
+    Tool(
+        name="ExecutePythonCode",
+        func=execute_python_code,
+        description="""在本地的Python环境中执行一段Python代码字符串。
+                   警告：这是一个高风险工具！
+                   参数: code (str): 要执行的Python代码字符串。例如: "print(1 + 1)"
+                   返回: str: 包含代码的标准输出和标准错误。"""
+    ),
+    Tool(
+        name="QueryKnowledgeBase",
+        func=query_dify_knowledge_base,
+        description=
+        """一个专用于查询“AI喵智能体”公众号内部知识的工具。
+        当你需要回答关于 'AI Agent'、'Dify'、'Ollama'、'Stable Diffusion'
+        等我们教程中特定内容的问题时，请使用此工具。
+        请勿用此工具查询天气、股票或执行代码。"""
+        )
 ]
 tool_names = ", ".join([tool.name for tool in tools])
 
