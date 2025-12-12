@@ -21,3 +21,5 @@ PiperTTS/demo.py
 PiperTTS/output.wav
 PiperTTS/models/zh_CN-huayan-medium.onnx
 PiperTTS/models/zh_CN-huayan-medium.onnx.json
+GLM-ASR/zai-org/GLM-ASR-Nano-2512/*
+kokoro-tts/*
