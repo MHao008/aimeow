@@ -1,0 +1,203 @@
+app:
+  description: 爆款标题生成助手
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 爆款标题生成助手
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/ollama:0.0.8@22213ae036605d41ea73bdd16908e03de1b9d5ab4656a49b8fb0343723f4cb4a
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1768046672541-source-1768046690027-target
+      source: '1768046672541'
+      sourceHandle: source
+      target: '1768046690027'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1768046690027-source-1768047142694-target
+      source: '1768046690027'
+      sourceHandle: source
+      target: '1768047142694'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: 目标用户
+          max_length: 48
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: goal
+        - default: 公众号
+          hint: ''
+          label: 平台
+          max_length: 48
+          options:
+          - 小红书
+          - 公众号
+          - 淘宝/拼多多
+          - 知乎
+          - B站
+          placeholder: ''
+          required: true
+          type: select
+          variable: place
+        - default: ''
+          hint: ''
+          label: 主题
+          max_length: 48
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: topic
+      height: 142
+      id: '1768046672541'
+      position:
+        x: 93
+        y: 261
+      positionAbsolute:
+        x: 93
+        y: 261
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3:latest
+          provider: langgenius/ollama/ollama
+        prompt_template:
+        - id: 89b80b95-7e63-48f9-b0ad-f4ee6e7dbe8b
+          role: system
+          text: "你是一个专业的爆款标题生成助手，你的核心任务是根据用户提供的 **{{#1768046672541.topic#}}+{{#1768046672541.place#}}+{{#1768046672541.goal#}}，生成\
+            \ **高点击率、高传播度、符合平台调性** 的爆款标题。\n\n【生成规则】\n1.  标题必须包含 **核心关键词**，禁止偏离主题；\n\
+            2.  满足 **平台特性**：\n    - 短视频（抖音/快手）：口语化、有悬念、带情绪、15-20字；\n    - 图文（小红书/公众号）：数字化、强利益、带表情、20-30字；\n\
+            \    - 电商（淘宝/拼多多）：卖点前置、带营销词、10-15字；\n    - 知识付费（知乎/B站）：提问式、干货感、带专业术语、25-35字；\n\
+            3.  必须使用 **爆款公式**：数字+利益+悬念/对比/情绪/稀缺性；\n4.  每个主题生成 **5 个不同风格的标题**，并标注 **标题类型**（悬念式、利益式、对比式、提问式、情绪式）；\n\
+            5.  禁止生成低俗、夸大、虚假的标题，符合平台内容规范。\n\n【输入格式】\n用户输入：主题 + 平台 + 受众\n示例输入：主题：AI绘画教程\
+            \ 平台：小红书 受众：零基础小白\n\n【输出格式】\n1.  [标题类型] 标题内容\n2.  [标题类型] 标题内容\n...（共10条）\n\
+            \n【你的回应要求】\n直接返回标题列表，无需额外解释，确保格式清晰，可直接复制使用。"
+        selected: false
+        title: 生成标题
+        type: llm
+        vision:
+          enabled: false
+      height: 90
+      id: '1768046690027'
+      position:
+        x: 382
+        y: 282
+      positionAbsolute:
+        x: 382
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        outputs:
+        - value_selector:
+          - '1768046690027'
+          - text
+          value_type: string
+          variable: text
+        selected: false
+        title: 输出标题
+        type: end
+      height: 90
+      id: '1768047142694'
+      position:
+        x: 684
+        y: 282
+      positionAbsolute:
+        x: 684
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 352.3888888888889
+      y: -38.63888888888886
+      zoom: 1
